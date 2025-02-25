@@ -1,6 +1,7 @@
 package org.camunda.bpmn.generator;
 
 public class FlowNodeInfo {
+    private String parentSubProcessId;
     private String newFlowNodeID;
     private Double originalX;
     private Double calcX;
@@ -15,6 +16,17 @@ public class FlowNodeInfo {
     private Double leftX;
     private Double leftY;
     private String type;
+
+    public FlowNodeInfo(String id, Double originalXInput, Double originalYInput,
+                        Double calcXInput, Double calcYInput, String typeInput,
+                        Double height, Double width, String parentSubProcessId) {
+
+        // Call the second constructor
+        this(id, originalXInput, originalYInput, calcXInput, calcYInput, typeInput, height, width);
+
+        // Then set the parentSubProcessId
+        this.parentSubProcessId = parentSubProcessId;
+    }
 
     public FlowNodeInfo (String id, Double originalXInput, Double originalYInput, Double calcXInput, Double calcYInput, String typeInput, Double height, Double width) {
         newFlowNodeID = id;
@@ -60,14 +72,14 @@ public class FlowNodeInfo {
             case "interface io.camunda.zeebe.model.bpmn.instance.StartEvent":
             case "interface io.camunda.zeebe.model.bpmn.instance.EndEvent":
             case "interface io.camunda.zeebe.model.bpmn.instance.BoundaryEvent":
-                topX = calcX + 18;
+                topX = calcX + 50;
                 topY = calcY;
-                rightX = calcX + 36;
-                rightY = calcY + 18;
-                bottomX = calcX + 18;
-                bottomY = calcY + 36;
+                rightX = calcX + 100;
+                rightY = calcY + 40;
+                bottomX = calcX + 50;
+                bottomY = calcY + 80;
                 leftX = calcX;
-                leftY = calcY + 18;
+                leftY = calcY + 40;
                 break;
 
             case "interface io.camunda.zeebe.model.bpmn.instance.SubProcess":
@@ -82,6 +94,14 @@ public class FlowNodeInfo {
                 break;
 
             default:
+                topX = calcX + 18;
+                topY = calcY;
+                rightX = calcX + 36;
+                rightY = calcY + 18;
+                bottomX = calcX + 18;
+                bottomY = calcY + 36;
+                leftX = calcX;
+                leftY = calcY + 18;
 
         }
     }
@@ -140,6 +160,14 @@ public class FlowNodeInfo {
 
     public String getType() {
         return type;
+    }
+
+    public String getParentSubProcessId() {
+        return parentSubProcessId;
+    }
+
+    public void setParentSubProcessId(String parentSubProcessId) {
+        this.parentSubProcessId = parentSubProcessId;
     }
 
 }

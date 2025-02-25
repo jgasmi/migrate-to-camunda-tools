@@ -9,9 +9,6 @@ import org.camunda.bpm.model.xml.ModelInstance;
 
 import org.w3c.dom.NodeList;
 
-import java.util.HashMap;
-
-
 public class DrawFlow {
 
     public static BpmnPlane drawFlow(BpmnPlane plane, ModelInstance modelInstance, SequenceFlow sequenceFlow, FlowNodeInfo source, FlowNodeInfo target, NodeList sequenceCurveList, Double subProcessXOffset, Double subProcessYOffset) {
@@ -226,8 +223,6 @@ public class DrawFlow {
         wp.setX(target.getLeftX());
         wp.setY(target.getLeftY());
         bpmnEdge.addChildElement(wp);
-
-        plane.addChildElement(bpmnEdge);
 
         plane.addChildElement(bpmnEdge);
 
